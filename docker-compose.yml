@@ -1,0 +1,16 @@
+version: '3'
+services:
+  fast-lio-noetic:
+    stdin_open: true
+    tty: true
+    command: tail -f /dev/null
+    image: fast-lio:noetic
+    build:
+      context: .
+      dockerfile: docker/Dockerfile
+    
+    network_mode: host
+
+    # user: "${UID}:${GID}"
+    volumes:
+      - $HOME/repo/FAST_LIO:/home/user/catkin_ws/src/FAST_LIO
