@@ -3,7 +3,8 @@ services:
   fast-lio-noetic:
     stdin_open: true
     tty: true
-    command: tail -f /dev/null
+    # command: tail -f /dev/null
+    command: /bin/zsh -c "roslaunch fast_lio mapping_corriere.launch"
     image: fast-lio:noetic
     build:
       context: .
@@ -11,6 +12,6 @@ services:
     
     network_mode: host
 
-    # user: "${UID}:${GID}"
+    user: "${UID}:${GID}"
     volumes:
       - $HOME/repo/FAST_LIO:/home/user/catkin_ws/src/FAST_LIO
