@@ -1,3 +1,11 @@
+## NTU Installation
+**Docker Installation:**  
+1. change *directory* to the docker directory and execute `./build.sh` (give chmod +x if necessary)
+2. Launch the container either through `./run.sh` or docker-compose but remember to change the mounting folder in `run.sh` or `docker-compose.yml` respectively before launching.
+
+** (dated 14/3/23) If running on corriere robot, FAST-LIO requires per-point timestamping in velodyne format so need to launch **rslidar_sdk** to output *XYZIRT pointcloud* and run it through **rs_to_velodyne** to convert the point timestamp to velodyne format 
+
+
 ## Related Works and Extended Application
 
 **SLAM:**
