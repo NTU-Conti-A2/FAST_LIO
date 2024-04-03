@@ -1,85 +1,49 @@
 # FAST-LIO
 
-Simple overview of use/purpose.
+SLAM algorithm used in the project. In the navigation part, the algorithm is mainly used to provide point cloud maps. (Localization is done at  `fast_lio_local`. ([Fast_Lio2_Localization](https://github.com/aulnzhengscut/Fast-Lio2-local.git)))
 
 ## Description
 
-An in-depth paragraph about your project and overview of use.
+Function: Used to generate point cloud maps for realizing robot localization in nodes.
 
 ## Getting Started
 
 ### Dependencies
 
-* Describe any prerequisites, libraries, OS version, etc., needed before installing program.
-* ex. Windows 10
+* Linux 20.04 (Deployment is achieved on this version, other versions are not tested.)
+* Docker
 
-### Installing
+### Installing & Executing program
 
-* How/where to download your program
-* Any modifications needed to be made to files/folders
-
-### Executing program
-
-* How to run the program
-* Step-by-step bullets
-```
-code blocks for commands
-```
-### Parameter tuning
-
-* which are the parameter files to be edit and paramter name and description . e.g. below:
-- **grid_size**: int - each grid will be square with side length **grid_size**
-- **robot_radius**: float - agent are assumed to be circles with radius being **robot_radius** in meter.
-
-## Help (Optional)
-
-Any advise for common problems or issues.
-```
-command to run if program contains helper info
-```
-
-## Authors
-
-Contributors names and contact info
-
-ex. Dominique Pizzie  
-ex. [@DomPizzie](https://twitter.com/dompizzie)
-
-## Version History (Optional)
-
-* 0.2
-    * Various bug fixes and optimizations
-    * See [commit change]() or See [release history]()
-* 0.1
-    * Initial Release
-
-## License (Optional)
-
-This project is licensed under the [NAME HERE] License - see the LICENSE.md file for details
- 
-
-## Acknowledgments (Optional)
-
-Inspiration, code snippets, etc.
-* [awesome-readme](https://github.com/matiassingers/awesome-readme)
-* [PurpleBooth](https://gist.github.com/PurpleBooth/109311bb0361f32d87a2)
-* [dbader](https://github.com/dbader/readme-template)
-* [zenorocha](https://gist.github.com/zenorocha/4526327)
-* [fvcproductions](https://gist.github.com/fvcproductions/1bfc2d4aecb01a834b46)
-
-
-
-
-## NTU Installation
 **Docker Installation:**  
 1. change *directory* to the docker directory and execute `./build.sh` (give chmod +x if necessary)
 2. Launch the container either through `./run.sh` or docker-compose but remember to change the mounting folder in `run.sh` or `docker-compose.yml` respectively before launching.
+
+### Parameter tuning
+
+There are quite a few adjustable parameters for fast-lio, please check the original author's github ([FAST_LIO](https://github.com/hku-mars/FAST_LIO)) for some very detailed parameter adjustments. Here are the changes made in this project to finalize the deployment. 
+
+
+## Authors
+
+Lunan Zheng  
+Email: aulnzheng@sina.com
+
+
+## Acknowledgments
+
+* [FAST_LIO](https://github.com/hku-mars/FAST_LIO)
+
+
+
+## Notes
 
 ** (dated 14/3/23) If running on corriere robot, FAST-LIO requires per-point timestamping in velodyne format so need to launch **rslidar_sdk** to output *XYZIRT pointcloud* and run it through **rs_to_velodyne** to convert the point timestamp to velodyne format 
 
 ** (dated 31/10/2023, by Timothy Chia) Dawei has left the project, but from my own debugging it seems there is no need to use the rs_to_velodyne. Fast-LIO will throw error messages about the time field, but it doesn't seem to interfere with the Odometry from visual inspection. It seems plausible that it throws the error message due to a type mismatch (float vs int or something) but it does in fact still use the time information. And if not, our robot moves so slowly that there is likely no performance gain from not using the timestamps to unskew the lidar points. Also, it is possible to build in Noetic, you just need to disable the c++ standard specification in the CMakeLists. This repo doesn't seem to work with the old rosbags without ring and timestamp fields. I've added TM.yaml and mapping_TM.launch for my own use with the topological mapping pipeline. The primary use for TM is to have the correct LIDAR configuration and the transformations between LIDAR, IMU, base_link etc. Final note: camera_init is apparently the initial position of the IMU when mapping begins. body is the current position of the IMU. This typically causes a separate TF tree to be generated. Lunan adds static transformations to connect everything back together, since for precise navigation he is typically working with a map frame aligned with the ground plane, and a base_link which is aligned with the base plate of the robot. For TM use, this is not particularly needed, as the map is built on such a large scale.
 
-## Related Works and Extended Application
+
+## Previous github Readme
 
 **SLAM:**
 
