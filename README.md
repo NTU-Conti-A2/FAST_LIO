@@ -23,6 +23,23 @@ Function: Used to generate point cloud maps for realizing robot localization in 
 
 There are quite a few adjustable parameters for fast-lio, please check the original author's github ([FAST_LIO](https://github.com/hku-mars/FAST_LIO)) for some very detailed parameter adjustments. Here are the changes made in this project to finalize the deployment. 
 
+1. FAST_LIO/config/corriere_new.yaml: The file covers the robot's sensor parameters. (number of lines for the LIDAR, intrinsic parameters for the IMU, extrinsic parameters between the IMU and the LIDAR, etc.)
+
+* Key parameters
+
+  intrinsic parameters for the IMU: `acc_cov`, `gyr_cov`, `b_acc_cov`, and `b_gyr_cov`.
+  
+  extrinsic parameters between the IMU and the LIDAR: extrinsic_T and extrinsic_R.
+  
+  save PCD: `pcd_save_en` should be set to `true` and `interval` is the sampling interval of the point could. (`-1` means sampling all the point could) The saved PCDs are in the corresponding `PCD` folders.
+
+2. FAST_LIO/launch/mapping_corriere_new.launch: 
+
+* Key parameters
+
+  `<rosparam command="load" file="$(find fast_lio)/config/corriere_new.yaml" />` should be changed if new yaml is created.
+  
+  `<param name="filter_size_surf" type="double" value="0.5" />` & `<param name="filter_size_map" type="double" value="0.5" />` need to be modified according to indoor and outdoor scenes.
 
 ## Authors
 
