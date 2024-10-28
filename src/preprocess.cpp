@@ -462,7 +462,7 @@ void Preprocess::give_feature(pcl::PointCloud<PointType> &pl, vector<orgtype> &t
   }
   uint head = 0;
 
-  while(types[head].range < blind)
+  while(head < types.size() && types[head].range < blind)
   {
     head++;
   }
