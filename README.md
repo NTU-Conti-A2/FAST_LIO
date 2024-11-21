@@ -1,6 +1,6 @@
 # FAST-LIO
 
-SLAM algorithm used in the project. In the navigation part, the algorithm is mainly used to provide point cloud maps. (Localization is done at  `fast_lio_local`. ([Fast_Lio2_Localization](https://github.com/aulnzhengscut/Fast-Lio2-local.git)))
+SLAM algorithm used in the project. In the navigation part, the algorithm is mainly used to provide point cloud maps. (Localization is done at  `fast_lio_local`. ([Fast_Lio2_Localization](https://github.com/NTU-Conti-A2/Fast-Lio2-local.git)))
 
 ## Description
 
@@ -21,7 +21,7 @@ Function: Used to generate point cloud maps for realizing robot localization in 
 
 ### Parameter tuning
 
-There are quite a few adjustable parameters for fast-lio, please check the original author's github ([FAST_LIO](https://github.com/hku-mars/FAST_LIO)) for some very detailed parameter adjustments. Here are the changes made in this project to finalize the deployment. 
+There are quite a few adjustable parameters for fast-lio, please check the original author's github ([FAST_LIO](https://github.com/NTU-Conti-A2/FAST_LIO.git)) for some very detailed parameter adjustments. Here are the changes made in this project to finalize the deployment. 
 
 1. FAST_LIO/config/corriere_new.yaml: The file covers the robot's sensor parameters. (number of lines for the LIDAR, intrinsic parameters for the IMU, extrinsic parameters between the IMU and the LIDAR, etc.)
 
